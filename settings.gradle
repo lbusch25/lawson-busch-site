@@ -1,1 +1,3 @@
 rootProject.name = 'lawson-busch'
+
+include 'front-end'
