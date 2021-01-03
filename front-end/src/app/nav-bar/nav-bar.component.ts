@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faGithubAlt } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
   public isActive: boolean = false;
+  public gitIcon: any = faGithubAlt;
   constructor(private router: Router) {}
 
   ngOnInit(): void {
