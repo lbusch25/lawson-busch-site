@@ -3,11 +3,118 @@
     <div class="modal-background" (click)="onCancel()"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Contact Me</p>
+        <p class="modal-card-title">Contact Me!</p>
         <button class="delete" aria-label="close" (click)="onCancel()"></button>
       </header>
       <section class="modal-card-body">
-        <!-- Content ... -->
+        <form [formGroup]="emailForm">
+          <div class="field">
+            <label for="email" class="label">Email:</label>
+            <div class="control has-icons-left">
+              <input
+                id="email"
+                type="email"
+                class="input form-control"
+                [ngClass]="{
+                  'is-danger':
+                    emailForm.controls.email.touched &&
+                    emailForm.controls.email.invalid
+                }"
+                placeholder="Your Email Address"
+                formControlName="email"
+              />
+              <span class="icon is-small is-left">
+                <i class="fa fa-envelope"></i>
+              </span>
+            </div>
+            <p
+              *ngIf="emailForm.controls.email.errors?.email"
+              class="help is-danger"
+            >
+              Please enter a valid email address.
+            </p>
+            <p
+              *ngIf="
+                emailForm.controls.email.touched &&
+                emailForm.controls.email.errors?.required
+              "
+              class="help is-danger"
+            >
+              Your email address is required.
+            </p>
+          </div>
+          <div class="field">
+            <label for="subject" class="label">Subject:</label>
+            <div class="control has-icons-left">
+              <input
+                #subject
+                type="text"
+                class="input"
+                [ngClass]="{
+                  'is-danger':
+                    emailForm.controls.subject.touched &&
+                    emailForm.controls.subject.invalid
+                }"
+                formControlName="subject"
+                placeholder="Subject"
+              />
+              <span class="icon is-small is-left">
+                <i class="fa fa-book"></i>
+              </span>
+            </div>
+            <p
+              *ngIf="emailForm.controls.subject.errors?.maxlength"
+              class="help is-danger"
+            >
+              Subject must be less than 50 characters.
+            </p>
+            <p
+              *ngIf="
+                emailForm.controls.subject.touched &&
+                emailForm.controls.subject.errors?.required
+              "
+              class="help is-danger"
+            >
+              Subject is required.
+            </p>
+          </div>
+          <div class="field">
+            <label for="message" class="label">Message:</label>
+            <textarea
+              #message
+              class="textarea"
+              [ngClass]="{
+                'is-danger':
+                  emailForm.controls.message.touched &&
+                  emailForm.controls.message.invalid
+              }"
+              placeholder="Say Hello!"
+              formControlName="message"
+              rows="10"
+            ></textarea>
+          </div>
+          <p
+            *ngIf="emailForm.controls.message.errors?.maxlength"
+            class="help is-danger"
+          >
+            Message must be less than 500 characters.
+          </p>
+          <p
+            *ngIf="emailForm.controls.message.errors?.minlength"
+            class="help is-danger"
+          >
+            Message must be at least 10 characters.
+          </p>
+          <p
+            *ngIf="
+              emailForm.controls.message.touched &&
+              emailForm.controls.message.errors?.required
+            "
+            class="help is-danger"
+          >
+            Message is required.
+          </p>
+        </form>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success" (click)="onSumbit()">Send</button>
