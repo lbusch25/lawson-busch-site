@@ -33,13 +33,23 @@ export class ContactPageComponent implements OnInit {
   ngOnInit(): void {
     this.isActive = true;
     this.emailForm = this.formBuilder.group({
-      emailGroup: this.formBuilder.group(
-        {
-          email: ['', [Validators.required, Validators.email]],
-          confirmEmail: ['', Validators.required],
-        },
-        { validator: emailMatcher }
-      ),
+      // emailGroup: this.formBuilder.group(
+      //   {
+      //     email: ['', [Validators.required, Validators.email]],
+      //     confirmEmail: ['', Validators.required],
+      //   },
+      //   { validator: emailMatcher }
+      // ),
+      email: ['', [Validators.required, Validators.email]],
+      subject: ['', [Validators.required, Validators.maxLength(50)]],
+      message: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(500),
+          Validators.minLength(10),
+        ],
+      ],
     });
   }
 
